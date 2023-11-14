@@ -43,6 +43,7 @@
 
 ;; provides autocomplete and built in errors
 (use-package lsp-mode
+  ;;:defer t
   :init
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   (setq lsp-keymap-prefix "C-c l")
@@ -58,8 +59,8 @@
 ;; base ui elements for lsp
 (use-package lsp-ui :commands lsp-ui-mode
   :ensure t
-  )
-
+  
+)
 (use-package company
   :ensure t
  ) 
