@@ -17,6 +17,12 @@
 (use-package vterm
   :ensure t)
 
+(use-package neotree
+  :ensure t)
+
+(use-package try
+  :ensure t)
+
 (use-package which-key
   :ensure t
   :config
@@ -34,7 +40,6 @@
   :ensure t
   :config
   (dashboard-setup-startup-hook))
-
 
 ;; provides autocomplete and built in errors
 (use-package lsp-mode
@@ -77,6 +82,13 @@
         "~/node_modules/mathjax-node-cli/bin/tex2svg"))
 
 (cua-mode)
+
+
+
+(use-package org-fragtog
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook 'org-fragtog-mode))
 
 (package-initialize)
 
