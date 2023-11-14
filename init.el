@@ -49,8 +49,6 @@
 (use-package go-mode
   :ensure t
   )
-
-
 ;;sycs emacs and system path
 (use-package exec-path-from-shell
   :ensure t
@@ -64,6 +62,15 @@
 (setq company-idle-delay 0)
 
 (exec-path-from-shell-initialize)
+
+;; make function that returns hooks that format and organize on save
+(defun lsp-go-install-save-hooks () (add-hook 'before-save-hook #'lsp-format-buffer t t) (add-hook 'before-save-hook #'lsp-organize-imports t t))
+;; add hooks from function to only run in go mode
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+;; start lsp in go mode
+(add-hook 'go-mode-hook #'lsp-deferred)
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
