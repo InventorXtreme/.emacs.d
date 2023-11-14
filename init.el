@@ -22,6 +22,18 @@
   :config
   (which-key-mode))
 
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ("s-p" . projectile-command-map)
+              ("C-c p" . projectile-command-map)))
+
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook))
 
 
 ;; provides autocomplete and built in errors
@@ -49,11 +61,20 @@
 (use-package go-mode
   :ensure t
   )
-;;sycs emacs and system path
+;;syncs emacs and system path
 (use-package exec-path-from-shell
   :ensure t
   )
 
+
+(use-package org-latex-impatient
+  :defer t
+  :ensure t
+  ;;:hook (org-mode . org-latex-impatient-mode)
+  :init
+  (setq org-latex-impatient-tex2svg-bin
+        ;; location of tex2svg executable
+        "~/node_modules/mathjax-node-cli/bin/tex2svg"))
 
 (cua-mode)
 
@@ -70,6 +91,9 @@
 
 ;; start lsp in go mode
 (add-hook 'go-mode-hook #'lsp-deferred)
+
+
+(setq-default c-basic-offset 4)
 
 
 (custom-set-variables
