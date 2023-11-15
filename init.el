@@ -36,10 +36,17 @@
               ("s-p" . projectile-command-map)
               ("C-c p" . projectile-command-map)))
 
+
+
+(setq dashboard-footer-messages '("The one true editor, Emacs!" "Who the hell uses VIM anyway? Go Evil!" "Free as free speech, free as free Beer" "Happy coding!" "Vi Vi Vi, the editor of the beast" "Welcome to the church of Emacs" "While any text editor can save your files, only Emacs can save your soul" "I showed you my source code, pls respond"))
+
+(setq dashboard-footer-messages (append dashboard-footer-messages '("sneed" "GPLv3: Free as in Freedom" "Gynu+Lwynux" "I use emacs btw")))
+
 (use-package dashboard
   :ensure t
-  :config
-  (dashboard-setup-startup-hook))
+  :config (dashboard-setup-startup-hook)
+
+  )
 
 ;; provides autocomplete and built in errors
 (use-package lsp-mode
@@ -114,6 +121,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(dashboard-startup-banner 'official)
  '(lsp-enable-symbol-highlighting t)
  '(package-selected-packages '(which-key use-package)))
 (custom-set-faces
