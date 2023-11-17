@@ -16,6 +16,9 @@
 
 (use-package vterm
   :ensure t)
+(use-package magit
+  :ensure t)
+
 
 (use-package neotree
   :ensure t)
