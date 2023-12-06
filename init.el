@@ -128,6 +128,8 @@
   :config
   (add-hook 'org-mode-hook 'org-fragtog-mode))
 
+(setq org-startup-indented t)
+
 (package-initialize)
 
 (setq company-idle-delay 0)
