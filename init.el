@@ -14,6 +14,17 @@
   (require 'use-package))
 
 
+(use-package visual-fill-column
+  :ensure t)
+
+(use-package writeroom-mode
+  :ensure t)
+
+
+;; dont forget to pdf-tools install
+(use-package pdf-tools
+  :ensure t)
+
 (use-package vterm
   :ensure t)
 (use-package magit
