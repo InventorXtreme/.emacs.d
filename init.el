@@ -180,3 +180,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
+(set-frame-parameter nil 'alpha-background 70)
+
+(add-to-list 'default-frame-alist '(alpha-background . 70))
