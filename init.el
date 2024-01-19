@@ -19,7 +19,8 @@
 
 (use-package writeroom-mode
   :ensure t)
-
+(use-package evil
+  :ensure t)
 
 ;; dont forget to pdf-tools install
 (use-package pdf-tools
