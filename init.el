@@ -112,8 +112,8 @@
 ;; base ui elements for lsp
 (use-package lsp-ui :commands lsp-ui-mode
   :ensure t
-  
-)
+  )
+
 (use-package company
   :ensure t
  ) 
@@ -134,6 +134,11 @@
   (setq org-latex-impatient-tex2svg-bin
         ;; location of tex2svg executable
         "~/node_modules/mathjax-node-cli/bin/tex2svg"))
+
+(use-package org-bullets
+  :ensure t)
+
+
 
 (cua-mode)
 
@@ -186,3 +191,5 @@
 (set-frame-parameter nil 'alpha-background 70)
 
 (add-to-list 'default-frame-alist '(alpha-background . 70))
+(setq-default tab-width 4)
+(evil-set-undo-system 'undo-redo)
