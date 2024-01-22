@@ -20,7 +20,11 @@
 (use-package writeroom-mode
   :ensure t)
 (use-package evil
-  :ensure t)
+  :ensure t
+  :init (evil-mode)
+  )
+(evil-set-undo-system 'undo-redo)
+
 
 ;; dont forget to pdf-tools install
 (use-package pdf-tools
@@ -136,7 +140,9 @@
         "~/node_modules/mathjax-node-cli/bin/tex2svg"))
 
 (use-package org-bullets
-  :ensure t)
+  :ensure t
+  :hook (org-mode . org-bullets-mode)
+  )
 
 
 
@@ -192,4 +198,3 @@
 
 (add-to-list 'default-frame-alist '(alpha-background . 70))
 (setq-default tab-width 4)
-(evil-set-undo-system 'undo-redo)
