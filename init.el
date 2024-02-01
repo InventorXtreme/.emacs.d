@@ -24,6 +24,7 @@
   :init (evil-mode)
   )
 (evil-set-undo-system 'undo-redo)
+(setq evil-want-fine-undo t) 
 
 
 ;; dont forget to pdf-tools install
@@ -194,7 +195,8 @@
  )
 
 
-(set-frame-parameter nil 'alpha-background 70)
+(set-frame-parameter nil 'alpha-background 60)
+(add-to-list 'default-frame-alist '(alpha-background . 60))
+(add-to-list 'default-frame-alist '(cursor-color . "#ffffff"))
 
-(add-to-list 'default-frame-alist '(alpha-background . 70))
 (setq-default tab-width 4)
