@@ -17,8 +17,11 @@
 (use-package visual-fill-column
   :ensure t)
 
+;; adds cool distraction free mode
 (use-package writeroom-mode
   :ensure t)
+
+;; vim emu
 (use-package evil
   :ensure t
   :init (evil-mode)
@@ -31,32 +34,37 @@
 (use-package pdf-tools
   :ensure t)
 
+;; built in term
 (use-package vterm
   :ensure t)
+
+;; git manager
 (use-package magit
   :ensure t)
 
+;; completion thing
 (use-package vertico
   :ensure t
   :init
   (vertico-mode))
 
-
+;; icons 
 (use-package all-the-icons
   :ensure t)
 
-
+;; saves minibuff history
 (use-package savehist
   :ensure t
   :init
   (savehist-mode))
 
+;; adds extra info to most minibuffs (file sizes n stuff)
 (use-package marginalia
   :ensure t
   :init
   (marginalia-mode))
 
-
+;; adds icons to completions
 (use-package all-the-icons-completion
   :ensure t
   :after (marginalia all-the-icons)
@@ -78,6 +86,7 @@
   :config
   (which-key-mode))
 
+;; project support
 (use-package projectile
   :ensure t
   :init
@@ -96,8 +105,7 @@
 (use-package dashboard
   :ensure t
   :config (dashboard-setup-startup-hook)
-
-  )
+)
 
 ;; provides autocomplete and built in errors
 (use-package lsp-mode
@@ -119,9 +127,12 @@
   :ensure t
   )
 
+;; text completion base
 (use-package company
   :ensure t
  ) 
+
+;; go support 
 (use-package go-mode
   :ensure t
   )
@@ -130,7 +141,7 @@
   :ensure t
   )
 
-
+;; autopreview latex expressions for math and other things (currently not used because its weird or smth idk)
 (use-package org-latex-impatient
   :defer t
   :ensure t
@@ -139,18 +150,18 @@
   (setq org-latex-impatient-tex2svg-bin
         ;; location of tex2svg executable
         "~/node_modules/mathjax-node-cli/bin/tex2svg"))
-
+;; org mode bullet characters instead of *s 
 (use-package org-bullets
   :ensure t
   :hook (org-mode . org-bullets-mode)
   )
 
 
-
+;; ctrl c for copy and ctrl v for paste and ctrl x for cut and ctrl z for undo
 (cua-mode)
 
 
-
+;; same thing as org-latex-impatient
 (use-package org-fragtog
   :ensure t
   :config
@@ -158,8 +169,19 @@
 
 (setq org-startup-indented t)
 
+(use-package yasnippet
+  :ensure t)
+(yas-global-mode 1)
+
+(use-package yasnippet-snippets
+  :ensure t)
+
+
+;; install and load packages
 (package-initialize)
 
+
+;; how long to wait before completing 
 (setq company-idle-delay 0)
 
 (exec-path-from-shell-initialize)
