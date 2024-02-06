@@ -29,6 +29,11 @@
 (evil-set-undo-system 'undo-redo)
 (setq evil-want-fine-undo t) 
 
+(use-package evil-org
+  :ensure t
+  :hook (org-mode . evil-org-mode)
+
+  )
 
 ;; dont forget to pdf-tools install
 (use-package pdf-tools
