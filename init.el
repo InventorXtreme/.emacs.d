@@ -40,8 +40,8 @@
   :ensure t)
 
 ;; built in term
-(use-package vterm
-  :ensure t)
+;;(use-package vterm
+;;  :ensure t)
 
 ;; git manager
 (use-package magit
