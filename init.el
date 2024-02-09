@@ -33,20 +33,23 @@
 (use-package writeroom-mode
   :ensure t)
 
-;; vim emu
+;;vim emu
 (use-package evil
-  :ensure t
-  :init (evil-mode)
-  )
+ :ensure t
+ :init (evil-mode)
+ )
 (evil-set-undo-system 'undo-redo)
 (setq evil-want-fine-undo t) 
 
 (use-package evil-org
-  :ensure t
-  :hook (org-mode . evil-org-mode)
+ :ensure t
+ :hook (org-mode . evil-org-mode)
+ )
 
-  )
-
+;; (use-package kakoune
+;;   :ensure t)
+;; (global-set-key (kbd "<escape>") 'ryo-modal-mode)
+;; (kakoune-setup-keybinds)
 ;; dont forget to pdf-tools install
 (use-package pdf-tools
   :ensure t)
