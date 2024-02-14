@@ -217,6 +217,9 @@
 
 (setq-default c-basic-offset 4)
 
+;; Line numbering
+(global-display-line-numbers-mode 1)
+(setq display-line-numbers-type 'relative)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
