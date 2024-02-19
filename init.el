@@ -41,6 +41,11 @@
 (evil-set-undo-system 'undo-redo)
 (setq evil-want-fine-undo t) 
 
+(define-key evil-insert-state-map (kbd "<up>") 'nope)
+(define-key evil-insert-state-map (kbd "<down>") 'nope)
+(define-key evil-insert-state-map (kbd "<left>") 'nope)
+(define-key evil-insert-state-map (kbd "<right>") 'nope)
+
 (use-package evil-org
  :ensure t
  :hook (org-mode . evil-org-mode)
