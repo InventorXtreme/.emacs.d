@@ -202,6 +202,19 @@
   :ensure t)
 
 
+
+(use-package scroll-restore
+  :ensure t)
+(scroll-restore-mode 1)
+;; Allow scroll-restore to modify the cursor face
+(setq scroll-restore-handle-cursor t)
+;; Make the cursor invisible while POINT is off-screen
+(setq scroll-restore-cursor-type nil)
+;; Jump back to the original cursor position after scrolling
+(setq scroll-restore-jump-back t)
+;; Toggle scroll-restore-mode with the Scroll Lock key
+
+
 ;; install and load packages
 (package-initialize)
 
