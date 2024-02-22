@@ -40,16 +40,19 @@
  )
 (evil-set-undo-system 'undo-redo)
 (setq evil-want-fine-undo t) 
-
+(setq evil-respect-visual-line-mode t)
 (define-key evil-insert-state-map (kbd "<up>") 'nope)
 (define-key evil-insert-state-map (kbd "<down>") 'nope)
 (define-key evil-insert-state-map (kbd "<left>") 'nope)
 (define-key evil-insert-state-map (kbd "<right>") 'nope)
 
+
 (use-package evil-org
  :ensure t
  :hook (org-mode . evil-org-mode)
+ :init (setf evil-org-key-theme '(textobjects insert additional shift todo heading))
  )
+
 
 ;; (use-package kakoune
 ;;   :ensure t)
