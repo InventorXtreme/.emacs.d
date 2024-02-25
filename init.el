@@ -150,11 +150,12 @@
   )
 
 
-;; base ui elements for lsp
+;;base ui elements for lsp
 (use-package lsp-ui :commands lsp-ui-mode
   :ensure t
   )
 
+ 
 ;; text completion base
 (use-package company
   :ensure t
