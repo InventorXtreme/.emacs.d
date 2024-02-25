@@ -266,3 +266,5 @@
 (add-to-list 'default-frame-alist '(cursor-color . "#ffffff"))
 
 (setq-default tab-width 4)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
