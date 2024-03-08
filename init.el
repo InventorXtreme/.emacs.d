@@ -267,6 +267,7 @@
 (add-to-list 'default-frame-alist '(cursor-color . "#ffffff"))
 
 (setq-default tab-width 4)
+(setq-default org-export-preserve-breaks t)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
