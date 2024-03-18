@@ -271,3 +271,8 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(defun eww-reddit-redirect(url)
+  "Redirect reddit.com to old.reddit.com automatically."
+  (replace-regexp-in-string "https://www.reddit.com" "https://old.reddit.com" url))
+
+(setq eww-url-transformers '(eww-remove-tracking eww-reddit-redirect))
