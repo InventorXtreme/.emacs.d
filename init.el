@@ -196,6 +196,10 @@
   :config
   (add-hook 'org-mode-hook 'org-fragtog-mode))
 
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+
+
+
 (setq org-startup-indented t)
 
 (use-package yasnippet
@@ -276,3 +280,5 @@
   (replace-regexp-in-string "https://www.reddit.com" "https://old.reddit.com" url))
 
 (setq eww-url-transformers '(eww-remove-tracking eww-reddit-redirect))
+
+
