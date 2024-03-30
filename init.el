@@ -1,6 +1,7 @@
 (setq scheme-program-name "guile")
 (load-theme 'wombat t)
 
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
@@ -54,7 +55,7 @@
  )
 
 
-;; (use-package kakoune
+;; (use-package kakoun 
 ;;   :ensure t)
 ;; (global-set-key (kbd "<escape>") 'ryo-modal-mode)
 ;; (kakoune-setup-keybinds)
@@ -223,6 +224,44 @@
 ;; Toggle scroll-restore-mode with the Scroll Lock key
 
 
+
+(use-package doom-modeline
+  :ensure t
+  :config
+  (setq doom-modeline-height 25)
+  (setq doom-modeline-time-icon t)
+  (setq doom-modeline-time-live-icon t)
+  (setq doom-modeline-time-analogue-clock t)
+  (setq doom-modeline-time t)
+  (setq doom-modeline-percent-position nil )
+  )
+
+
+
+
+(use-package doom-modeline-now-playing
+  :ensure t
+  :config
+  (doom-modeline-now-playing-timer)
+  )
+
+(doom-modeline-def-modeline 'my-doom-modeline
+  '(eldoc bar workspace-name window-number modals matches follow buffer-info remote-host buffer-position word-count parrot selection-info )
+  '( compilation objed-state misc-info persp-name battery grip irc mu4e gnus github debug repl lsp minor-modes input-method indent-info buffer-encoding major-mode process vcs check time ))
+
+(defun setup-custom-doom-modeline()
+  (doom-modeline-set-modeline 'my-doom-modeline 'default))
+
+(add-hook 'doom-modeline-mode-hook 'setup-custom-doom-modeline)
+
+
+(doom-modeline-mode 1)
+(setq display-time-default-load-average nil)
+(display-time-mode 1)
+(size-indication-mode 1)
+
+
+
 ;; install and load packages
 (package-initialize)
 
@@ -258,17 +297,12 @@
  '(lsp-enable-symbol-highlighting t)
  '(org-agenda-files nil)
  '(package-selected-packages '(which-key use-package)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 
 (set-frame-parameter nil 'alpha-background 60)
 (add-to-list 'default-frame-alist '(alpha-background . 60))
 (add-to-list 'default-frame-alist '(cursor-color . "#ffffff"))
+
 
 (setq-default tab-width 4)
 (setq-default org-export-preserve-breaks t)
@@ -282,3 +316,9 @@
 (setq eww-url-transformers '(eww-remove-tracking eww-reddit-redirect))
 
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
