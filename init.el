@@ -244,12 +244,6 @@
 
 
 
-(use-package doom-modeline-now-playing
-  :ensure t
-  :config
-  (doom-modeline-now-playing-timer)
-  )
-
 (doom-modeline-def-modeline 'my-doom-modeline
   '(eldoc bar workspace-name window-number modals matches follow buffer-info remote-host buffer-position word-count parrot selection-info )
   '( compilation objed-state misc-info persp-name battery grip irc mu4e gnus github debug repl lsp minor-modes input-method indent-info buffer-encoding major-mode process vcs check time ))
