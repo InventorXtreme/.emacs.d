@@ -27,6 +27,11 @@
 (setq tramp-backup-directory-alist backup-directory-alist) ;; use same settings for tramp
 
 
+(use-package cyberpunk-theme
+  :ensure t)
+
+(load-theme 'cyberpunk t)
+
 (use-package visual-fill-column
   :ensure t)
 
@@ -292,7 +297,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
+   '("a1c18db2838b593fba371cb2623abd8f7644a7811ac53c6530eebdf8b9a25a8d" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
  '(dashboard-startup-banner 'official)
  '(lsp-enable-symbol-highlighting t)
  '(org-agenda-files nil)
