@@ -191,7 +191,10 @@
   :hook (org-mode . org-bullets-mode)
   )
 
-
+(use-package flycheck-inline
+  :ensure t
+  :config (add-hook 'flycheck-mode-hook #'flycheck-inline-mode)
+)
 ;; ctrl c for copy and ctrl v for paste and ctrl x for cut and ctrl z for undo
 (cua-mode)
 
@@ -276,7 +279,7 @@
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
 ;; start lsp in go mode
-(add-hook 'go-mode-hook #'lsp-deferred)
+;;(add-hook 'go-mode-hook #'lsp-deferred)
 
 
 (setq-default c-basic-offset 4)
