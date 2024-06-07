@@ -86,6 +86,9 @@
 (use-package all-the-icons
   :ensure t)
 
+(use-package circe
+  :ensure t)
+
 ;; saves minibuff history
 (use-package savehist
   :ensure t
