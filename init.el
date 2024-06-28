@@ -304,7 +304,6 @@
  '(package-selected-packages '(which-key use-package)))
 
 
-(set-frame-parameter nil 'alpha-background 60)
 (add-to-list 'default-frame-alist '(alpha-background . 60))
 (add-to-list 'default-frame-alist '(cursor-color . "#ffffff"))
 
