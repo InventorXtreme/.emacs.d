@@ -86,9 +86,6 @@
 (use-package all-the-icons
   :ensure t)
 
-(use-package circe
-  :ensure t)
-
 ;; saves minibuff history
 (use-package savehist
   :ensure t
@@ -253,6 +250,12 @@
   )
 
 
+(use-package eww
+  :commands (eww)
+  :bind (:map eww-mode-map
+			  ("C-c e" . eww-browse-with-external-browser))
+  )
+
 
 
 (doom-modeline-def-modeline 'my-doom-modeline
@@ -269,33 +272,6 @@
 (setq display-time-default-load-average nil)
 (display-time-mode 1)
 (size-indication-mode 1)
-
-
-(use-package eaf
-  :load-path "~/.emacs.d/site-lisp/emacs-application-framework"
-  :custom
-  ; See https://github.com/emacs-eaf/emacs-application-framework/wiki/Customization
-  (eaf-browser-continue-where-left-off t)
-  (eaf-browser-enable-adblocker t)
-  (browse-url-browser-function 'eaf-open-browser)
-  :config
-  (defalias 'browse-web #'eaf-open-browser)
-  ;;(eaf-bind-key scroll_up "C-n" eaf-pdf-viewer-keybinding)
-  ;;(eaf-bind-key scroll_down "C-p" eaf-pdf-viewer-keybinding)
-  ;;(eaf-bind-key take_photo "p" eaf-camera-keybinding)
-  ;;(eaf-bind-key nil "M-q" eaf-browser-keybinding)) ;; unbind, see more in the Wiki
-)
-
-(use-package eaf-browser
-	:after eaf)
-(use-package eaf-video-player
-	:after eaf)
-
-
-;;(require 'eaf-pdf-viewer)
-;;(require 'eaf-browser)
-;;(require 'eaf-video-player)
-;;(require 'eaf-pyqterminal)
 
 
 ;; install and load packages
@@ -327,6 +303,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(browse-url-generic-program "xdg-open")
+ '(browse-url-handlers
+   '((".*webm" lambda
+	  (url &optional new-window)
+	  (call-process "mpv" nil 0 nil url))))
+ '(browse-url-secondary-browser-function 'browse-url)
  '(custom-safe-themes
    '("a1c18db2838b593fba371cb2623abd8f7644a7811ac53c6530eebdf8b9a25a8d" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
  '(dashboard-startup-banner 'official)
@@ -348,7 +330,10 @@
   "Redirect reddit.com to old.reddit.com automatically."
   (replace-regexp-in-string "https://www.reddit.com" "https://old.reddit.com" url))
 
+(setq eww-use-external-browser-for-content-type
+        "\\`\\(video/\\|audio\\)") ; On GNU/Linux check your mimeapps.list
 (setq eww-url-transformers '(eww-remove-tracking eww-reddit-redirect))
+
 
 
 (custom-set-faces
