@@ -235,6 +235,11 @@
 ;; Toggle scroll-restore-mode with the Scroll Lock key
 
 
+;; emacs appliaction framework
+
+
+
+
 
 (use-package doom-modeline
   :ensure t
@@ -265,6 +270,32 @@
 (display-time-mode 1)
 (size-indication-mode 1)
 
+
+(use-package eaf
+  :load-path "~/.emacs.d/site-lisp/emacs-application-framework"
+  :custom
+  ; See https://github.com/emacs-eaf/emacs-application-framework/wiki/Customization
+  (eaf-browser-continue-where-left-off t)
+  (eaf-browser-enable-adblocker t)
+  (browse-url-browser-function 'eaf-open-browser)
+  :config
+  (defalias 'browse-web #'eaf-open-browser)
+  ;;(eaf-bind-key scroll_up "C-n" eaf-pdf-viewer-keybinding)
+  ;;(eaf-bind-key scroll_down "C-p" eaf-pdf-viewer-keybinding)
+  ;;(eaf-bind-key take_photo "p" eaf-camera-keybinding)
+  ;;(eaf-bind-key nil "M-q" eaf-browser-keybinding)) ;; unbind, see more in the Wiki
+)
+
+(use-package eaf-browser
+	:after eaf)
+(use-package eaf-video-player
+	:after eaf)
+
+
+;;(require 'eaf-pdf-viewer)
+;;(require 'eaf-browser)
+;;(require 'eaf-video-player)
+;;(require 'eaf-pyqterminal)
 
 
 ;; install and load packages
