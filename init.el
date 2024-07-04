@@ -39,6 +39,9 @@
 (use-package writeroom-mode
   :ensure t)
 
+
+
+
 ;;vim emu
 (use-package evil
  :ensure t
@@ -134,7 +137,7 @@
 
 (setq dashboard-footer-messages '("The one true editor, Emacs!" "Who the hell uses VIM anyway? Go Evil!" "Free as free speech, free as free Beer" "Happy coding!" "Vi Vi Vi, the editor of the beast" "Welcome to the church of Emacs" "While any text editor can save your files, only Emacs can save your soul" "I showed you my source code, pls respond"))
 
-(setq dashboard-footer-messages (append dashboard-footer-messages '("sneed" "GPLv3: Free as in Freedom" "Gynu+Lwynux" "I use emacs btw")))
+(setq dashboard-footer-messages (append dashboard-footer-messages '("sneed" "GPLv3: Free as in Freedom" "Gynu+Lwynux" "I use emacs btw" "😁 v.s. 💀 ultimate showdown" )))
 
 (use-package dashboard
   :ensure t
@@ -307,7 +310,8 @@
  '(browse-url-handlers
    '((".*webm" lambda
 	  (url &optional new-window)
-	  (call-process "mpv" nil 0 nil url))))
+	  (call-process "mpv" nil 0 nil url))
+	 (".*" . browse-url-firefox)))
  '(browse-url-secondary-browser-function 'browse-url)
  '(custom-safe-themes
    '("a1c18db2838b593fba371cb2623abd8f7644a7811ac53c6530eebdf8b9a25a8d" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
