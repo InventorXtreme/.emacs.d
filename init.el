@@ -14,15 +14,20 @@
   (add-to-list 'load-path "<path where use-package is installed>")
   (require 'use-package))
 
-;; Autosave settings
+;; backup settings
 (setq
    backup-by-copying t      ; don't clobber symlinks
    backup-directory-alist
-    '(("." . "~/.saves/"))    ; don't litter my fs tree
+    '(("." . "~/.backups/"))    ; don't litter my fs tree
    delete-old-versions t
    kept-new-versions 6
    kept-old-versions 2
    version-control t)       ; use versioned backups
+
+;; autosave settings
+(setq auto-save-file-name-transforms
+	  `((".*" "~/.autosaves/" t)))
+
 
 (setq tramp-backup-directory-alist backup-directory-alist) ;; use same settings for tramp
 
@@ -174,6 +179,12 @@
 (use-package go-mode
   :ensure t
   )
+
+;; zig support
+(use-package zig-mode
+	:ensure t
+	)
+
 ;;syncs emacs and system path
 (use-package exec-path-from-shell
   :ensure t
@@ -317,7 +328,7 @@
    '("a1c18db2838b593fba371cb2623abd8f7644a7811ac53c6530eebdf8b9a25a8d" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
  '(dashboard-startup-banner 'official)
  '(lsp-enable-symbol-highlighting t)
- '(org-agenda-files nil)
+ '(org-agenda-files '("~/Sync/agenda"))
  '(package-selected-packages '(which-key use-package)))
 
 
