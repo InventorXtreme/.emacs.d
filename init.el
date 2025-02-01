@@ -1,3 +1,9 @@
+;; only garbage collect at idle
+
+(setq gc-cons-threshold (eval-when-compile (* 1024 1024 1024)))
+(run-with-idle-timer 2 t (lambda () (garbage-collect)))
+
+
 (setq scheme-program-name "guile")
 (load-theme 'wombat t)
 
@@ -138,8 +144,6 @@
   ;; Enables ligature checks globally in all buffers. You can also do it
   ;; per mode with `ligature-mode'.
   (global-ligature-mode t))
-
-
 
 ;; (use-package kakoun 
 ;;   :ensure t)
