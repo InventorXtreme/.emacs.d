@@ -3,7 +3,7 @@
 (setq gc-cons-threshold (eval-when-compile (* 1024 1024 1024)))
 (run-with-idle-timer 2 t (lambda () (garbage-collect)))
 (setq garbage-collection-messages t)
-
+(setq url-user-agent "Lynx/2.9.2 libwww-FM/2.14 SSL-MM/1.4.1 OpenSSL/3.4.0")
 (setq scheme-program-name "guile")
 (load-theme 'wombat t)
 
