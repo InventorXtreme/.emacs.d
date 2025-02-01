@@ -214,6 +214,24 @@
               ("s-p" . projectile-command-map)
               ("C-c p" . projectile-command-map)))
 
+(defun run-cmd (COMMAND)
+  "Runs a command in the project root or current directory"
+  ;;(interactive "Command" taken from the def of projectile)
+  (interactive
+   (list
+    (read-shell-command (if shell-command-prompt-show-cwd
+                            (format-message "Async shell command in `%s': "
+                                            (abbreviate-file-name
+                                             default-directory))
+                          "Async shell command: ")
+                        nil nil
+			)))
+  (if (projectile-project-p) ( projectile-run-async-shell-command-in-root COMMAND) 
+	(async-shell-command COMMAND))
+  )
+(global-set-key (kbd "C-<tab>") 'run-cmd)
+
+
 (org-babel-do-load-languages
  'org-babel-load-languages '((C . t) (python . t) ))
 
