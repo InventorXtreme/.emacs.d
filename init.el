@@ -278,7 +278,11 @@
 ;; zig support
 (use-package zig-mode
 	:ensure t
-	)
+ )
+
+(use-package rust-mode
+  :ensure t
+  )
 
 ;;syncs emacs and system path
 (use-package exec-path-from-shell
@@ -358,6 +362,17 @@
   (setq doom-modeline-percent-position nil )
   )
 
+(use-package gptel
+  :ensure t
+  )
+
+(gptel-make-openai "OpenRouter"               ;Any name you want
+  :host "openrouter.ai"
+  :endpoint "/api/v1/chat/completions"
+  :stream t
+  :key "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"
+  :models '(deepseek/deepseek-r1
+            ))
 
 (use-package eww
   :commands (eww)
@@ -369,6 +384,15 @@
 (use-package latex-preview-pane
   :ensure t)
 
+(use-package ultra-scroll
+  :load-path "~/.emacs.d/ultra-scroll" ; if you git clone'd instead of using vc
+  ;:ensure t
+  ;:vc (:url "https://github.com/jdtsmith/ultra-scroll") ; For Emacs>=30
+  :init
+  (setq scroll-conservatively 101 ; important!
+        scroll-margin 0) 
+  :config
+  (ultra-scroll-mode 1))
 
 
 (doom-modeline-def-modeline 'my-doom-modeline
@@ -389,6 +413,61 @@
 
 ;; install and load packages
 (package-initialize)
+
+
+
+;; calc rref
+
+(require 'calc-mtx)
+
+(defun calc-rref (arg)
+  "Compute the reduce row echelon form of a matrix"
+  (interactive "P")
+  (calc-slow-wrapper
+   (calc-unary-op "rref" 'calcFunc-rref arg)))
+
+(defun calcFunc-rref (m)
+  "Compute the reduce row echelon form of a matrix"
+  (if (math-matrixp m)
+      (math-with-extra-prec 2 (rref-raw m))
+    (math-reject-arg m 'matrixp)))
+
+;; Algorithm from http://rosettacode.org/wiki/Reduced_row_echelon_form
+(defun rref-raw (orig-m)
+  (let* ((m (math-copy-matrix orig-m))
+         (rows (1- (length m)))
+         (cols (1- (length (nth 1 m))))
+         (lead 1)
+         (r 1))
+    (catch 'done
+      (while (and (<= r rows) (<= lead cols))
+        (let ((i r))
+          (while (math-zerop (nth lead (nth i m)))
+            (setq i (1+ i))
+            (when (> i rows)
+              (setq i r lead (1+ lead))
+              (when (> lead cols) (throw 'done m))))
+          (setq m (math-swap-rows m i r))
+          (let ((pivot (nth lead (nth r m))) (i 1))
+            (unless (math-zerop pivot)
+              (let ((j lead))
+                (while (<= j cols)
+                  (setcar (nthcdr j (nth r m))
+                          (math-div (nth j (nth r m)) pivot))
+                  (setq j (1+ j)))))
+            (while (<= i rows)
+              (unless (= i r)
+                (let ((j lead) (c (nth lead (nth i m))))
+                  (while (<= j cols)
+                    (setcar (nthcdr j (nth i m))
+                            (math-sub (nth j (nth i m))
+                                      (math-mul c (nth j (nth r m)))))
+                    (setq j (1+ j)))))
+              (setq i (1+ i)))))
+        (setq r (1+ r) lead (1+ lead)))
+      m)))
+
+(define-key calc-mode-map (kbd "v !") #'calc-rref)
 
 
 ;; how long to wait before completing 
@@ -416,26 +495,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(browse-url-generic-program "xdg-open")
- '(browse-url-handlers
-   '((".*webm" lambda
-	  (url &optional new-window)
-	  (call-process "mpv" nil 0 nil url))
-	 (".*" . browse-url-firefox)))
- '(browse-url-secondary-browser-function 'browse-url)
- '(cua-mode t)
- '(custom-safe-themes
-   '("a1c18db2838b593fba371cb2623abd8f7644a7811ac53c6530eebdf8b9a25a8d" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
- '(dashboard-startup-banner 'official)
- '(display-line-numbers-type 'relative)
- '(display-time-mode t)
- '(global-display-line-numbers-mode t)
- '(lsp-enable-symbol-highlighting t)
- '(menu-bar-mode nil)
- '(org-agenda-files '("~/Sync/agenda"))
- '(package-selected-packages '(which-key use-package))
- '(size-indication-mode t)
- '(tool-bar-mode nil))
+ '(package-selected-packages nil)
+ '(package-vc-selected-packages
+   '((ultra-scroll :url "https://github.com/jdtsmith/ultra-scroll"))))
 
 
 ;;(add-to-list 'default-frame-alist '(alpha-background . 60))
@@ -443,6 +505,7 @@
 
 
 (setq-default tab-width 4)
+(c-set-offset 'access-label '/)
 (setq-default org-export-preserve-breaks t)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -462,4 +525,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Cascadia Code" :foundry "SAJA" :slant normal :weight regular :height 98 :width normal)))))
+ )
