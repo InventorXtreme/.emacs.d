@@ -73,7 +73,11 @@
  :init (setf evil-org-key-theme '(textobjects insert additional shift todo heading))
  )
 
+(use-package compile
+  :config
+  (setq compilation-scroll-output t))
 
+;; cool font stuff
 (use-package ligature
   :ensure
   :config
@@ -149,6 +153,8 @@
 ;;   :ensure t)
 ;; (global-set-key (kbd "<escape>") 'ryo-modal-mode)
 ;; (kakoune-setup-keybinds)
+
+
 ;; dont forget to pdf-tools install
 (use-package pdf-tools
   :ensure t)
@@ -194,12 +200,15 @@
    :ensure t
    :hook (dired-mode . all-the-icons-dired-mode))
 
+;; file tree view
 (use-package neotree
   :ensure t)
 
+;; try packages without installing them
 (use-package try
   :ensure t)
 
+;; see command connected to keypress
 (use-package which-key
   :ensure t
   :config
@@ -214,6 +223,8 @@
               ("s-p" . projectile-command-map)
               ("C-c p" . projectile-command-map)))
 
+
+;; runs a command in either current directory or project dir if it exists
 (defun run-cmd (COMMAND)
   "Runs a command in the project root or current directory"
   ;;(interactive "Command" taken from the def of projectile)
@@ -231,7 +242,7 @@
   )
 (global-set-key (kbd "C-<tab>") 'run-cmd)
 
-
+;; babel stuff
 (org-babel-do-load-languages
  'org-babel-load-languages '((C . t) (python . t) ))
 
@@ -242,7 +253,7 @@
 (use-package dashboard
   :ensure t
   :config (dashboard-setup-startup-hook)
-)
+  )
 
 ;; provides autocomplete and built in errors
 (use-package lsp-mode
@@ -370,7 +381,7 @@
   :host "openrouter.ai"
   :endpoint "/api/v1/chat/completions"
   :stream t
-  :key "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"
+  :key "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"
   :models '(deepseek/deepseek-r1
             ))
 
@@ -495,9 +506,27 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages nil)
+ '(cua-mode t)
+ '(display-line-numbers-type 'relative)
+ '(display-time-mode t)
+ '(global-display-line-numbers-mode t)
+ '(menu-bar-mode nil)
+ '(package-selected-packages
+   '(all-the-icons-completion all-the-icons-dired circe company
+							  cyberpunk-theme dashboard disaster
+							  doom-modeline evil-org
+							  exec-path-from-shell flycheck-inline
+							  go-mode gptel latex-preview-pane
+							  ligature lsp-ui magit marginalia neotree
+							  org-bullets org-fragtog
+							  org-latex-impatient pdf-tools projectile
+							  rust-mode scroll-restore try vertico
+							  which-key writeroom-mode
+							  yasnippet-snippets zig-mode))
  '(package-vc-selected-packages
-   '((ultra-scroll :url "https://github.com/jdtsmith/ultra-scroll"))))
+   '((ultra-scroll :url "https://github.com/jdtsmith/ultra-scroll")))
+ '(size-indication-mode t)
+ '(tool-bar-mode nil))
 
 
 ;;(add-to-list 'default-frame-alist '(alpha-background . 60))
@@ -525,4 +554,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "Cascadia Code NF" :foundry "SAJA" :slant normal :weight regular :height 98 :width normal)))))
