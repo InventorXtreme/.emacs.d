@@ -5,7 +5,7 @@
 (setq garbage-collection-messages t)
 (setq url-user-agent "Lynx/2.9.2 libwww-FM/2.14 SSL-MM/1.4.1 OpenSSL/3.4.0")
 (setq scheme-program-name "guile")
-(load-theme 'wombat t)
+;;(load-theme 'wombat t)
 
 
 (require 'package)
@@ -38,20 +38,30 @@
 (setq tramp-backup-directory-alist backup-directory-alist) ;; use same settings for tramp
 
 
-(use-package cyberpunk-theme
-  :ensure t)
+ (use-package cyberpunk-theme
+   :ensure t)
+
+;; (use-package quelpa
+  ;; :ensure t
+  ;; )
+
+
+;; (use-package nano-theme
+;;   :ensure t
+;;   :vc ( :branch master :url "https://github.com/rougier/nano-theme.git"))
+
+
+;; (load-theme 'cyberpunk t)
+;; https://github.com/rougier/nano-theme.git
+
+
+;; (use-package moe-theme
+;;   :ensure t)
 
 (load-theme 'cyberpunk t)
 
 (use-package visual-fill-column
   :ensure t)
-
-;; adds cool distraction free mode
-(use-package writeroom-mode
-  :ensure t)
-
-
-
 
 ;;vim emu
 (use-package evil
@@ -65,7 +75,8 @@
 (define-key evil-insert-state-map (kbd "<down>") 'nope)
 (define-key evil-insert-state-map (kbd "<left>") 'nope)
 (define-key evil-insert-state-map (kbd "<right>") 'nope)
-
+(evil-set-leader 'normal (kbd "SPC"))
+(evil-define-key 'normal 'global (kbd "<leader>r") 'recompile)
 
 (use-package evil-org
  :ensure t
@@ -315,13 +326,38 @@
   :hook (org-mode . org-bullets-mode)
   )
 
-(use-package flycheck-inline
-  :ensure t
-  :config (add-hook 'flycheck-mode-hook #'flycheck-inline-mode)
-)
+;; (use-package flycheck-inline
+;;   :ensure t
+;;   :config (add-hook 'flycheck-mode-hook #'flycheck-inline-mode)
+;; )
+
+
 ;; ctrl c for copy and ctrl v for paste and ctrl x for cut and ctrl z for undo
 (cua-mode)
+(use-package sideline
+  :ensure t
+  :init
+  (setq ;;sideline-backends-left-skip-current-line t   ; don't display on current line (left)
+        ;;sideline-backends-right-skip-current-line t  ; don't display on current line (right)
+        sideline-backends-left '(sideline-flycheck)
+        sideline-backends-right '(sideline-lsp)
+        sideline-order-left 'down                    ; or 'up
+        sideline-order-right 'up                     ; or 'down
+        sideline-format-left "%s   "                 ; format for left aligment
+        sideline-format-right "   %s"                ; format for right aligment
+        sideline-priority 100                        ; overlays' priority
+        sideline-display-backend-name t)            ; display the backend name
+  :hook ((flycheck-mode . sideline-mode)   ; for `sideline-flycheck`
+         (flymake-mode  . sideline-mode))  ; for `sideline-flymake`
+		 )
 
+(use-package sideline-flycheck
+  :ensure t
+  :hook (flycheck-mode . sideline-flycheck-setup))
+
+(use-package sideline-lsp
+  :ensure t
+  :hook (lsp-mode . sideline-lsp-setup))
 
 ;; same thing as org-latex-impatient
 (use-package org-fragtog
@@ -365,7 +401,7 @@
 (use-package doom-modeline
   :ensure t
   :config
-  (setq doom-modeline-height 25)
+  (setq doom-modeline-height 32)
   (setq doom-modeline-time-icon t)
   (setq doom-modeline-time-live-icon t)
   (setq doom-modeline-time-analogue-clock t)
@@ -420,7 +456,6 @@
 (setq display-time-default-load-average nil)
 (display-time-mode 1)
 (size-indication-mode 1)
-
 
 ;; install and load packages
 (package-initialize)
@@ -507,8 +542,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(cua-mode t)
+ '(custom-safe-themes
+   '("8899e88d19a37d39c7187f4bcb5bb596fba990728ef963420b93e2aea5d1666a"
+	 "1781e8bccbd8869472c09b744899ff4174d23e4f7517b8a6c721100288311fa5"
+	 "de8f2d8b64627535871495d6fe65b7d0070c4a1eb51550ce258cd240ff9394b0"
+	 "fc1275617f9c8d1c8351df9667d750a8e3da2658077cfdda2ca281a2ebc914e0"
+	 "1f292969fc19ba45fbc6542ed54e58ab5ad3dbe41b70d8cb2d1f85c22d07e518"
+	 default))
  '(display-line-numbers-type 'relative)
- '(display-time-mode t)
+ '(display-time-mode nil)
  '(global-display-line-numbers-mode t)
  '(menu-bar-mode nil)
  '(package-selected-packages
@@ -517,12 +559,14 @@
 							  doom-modeline evil-org
 							  exec-path-from-shell flycheck-inline
 							  go-mode gptel latex-preview-pane
-							  ligature lsp-ui magit marginalia neotree
-							  org-bullets org-fragtog
-							  org-latex-impatient pdf-tools projectile
-							  rust-mode scroll-restore try vertico
-							  which-key writeroom-mode
-							  yasnippet-snippets zig-mode))
+							  ligature lsp-ui magit marginalia
+							  moe-theme nano-theme neotree org-bullets
+							  org-fragtog org-latex-impatient
+							  pdf-tools projectile quelpa rust-mode
+							  scroll-restore sideline-flycheck
+							  sideline-lsp try vertico which-key
+							  writeroom-mode yasnippet-snippets
+							  zig-mode))
  '(package-vc-selected-packages
    '((ultra-scroll :url "https://github.com/jdtsmith/ultra-scroll")))
  '(size-indication-mode t)
@@ -554,4 +598,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Cascadia Code NF" :foundry "SAJA" :slant normal :weight regular :height 98 :width normal)))))
+ '(default ((t (:family "Cascadia Code NF" :foundry "SAJA" :slant normal :weight regular :height 98 :width normal))))
+ '(mode-line ((t nil))))
