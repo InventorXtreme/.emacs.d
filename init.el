@@ -85,8 +85,14 @@
  )
 
 (use-package compile
+  :ensure t
   :config
   (setq compilation-scroll-output t))
+
+(use-package bash-completion
+  :ensure t
+  :init (bash-completion-setup)
+  )
 
 ;; cool font stuff
 (use-package ligature
@@ -225,7 +231,7 @@
   :config
   (which-key-mode))
 
-;; project support
+;;project support
 (use-package projectile
   :ensure t
   :init
@@ -235,7 +241,7 @@
               ("C-c p" . projectile-command-map)))
 
 
-;; runs a command in either current directory or project dir if it exists
+;;runs a command in either current directory or project dir if it exists
 (defun run-cmd (COMMAND)
   "Runs a command in the project root or current directory"
   ;;(interactive "Command" taken from the def of projectile)
@@ -251,7 +257,15 @@
   (if (projectile-project-p) ( projectile-run-async-shell-command-in-root COMMAND) 
 	(async-shell-command COMMAND))
   )
-(global-set-key (kbd "C-<tab>") 'run-cmd)
+
+;; (defun run-cmd () "Run command time" (interactive) 
+;; (defun run-cmd () "Run command time" (interactive) 
+;;(global-set-key (kbd "C-<tab>") 'run-cmd)
+
+;;(defun mrrp (COMMAND) "mrrp" (interactive "r") (call-interactively 'project-async-shell-command))
+
+(keymap-global-set "C-<tab>" 'project-async-shell-command)
+;;(global-set-key (kbd "C-<tab>") (lambda (COMMAND) (async-shell-commnad COMMAND)))
 
 ;; babel stuff
 (org-babel-do-load-languages
@@ -417,7 +431,8 @@
   :host "openrouter.ai"
   :endpoint "/api/v1/chat/completions"
   :stream t
-  :key "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"
+  :key "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"
+  ;; :key "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" 
   :models '(deepseek/deepseek-r1
             ))
 
@@ -553,20 +568,7 @@
  '(display-time-mode nil)
  '(global-display-line-numbers-mode t)
  '(menu-bar-mode nil)
- '(package-selected-packages
-   '(all-the-icons-completion all-the-icons-dired circe company
-							  cyberpunk-theme dashboard disaster
-							  doom-modeline evil-org
-							  exec-path-from-shell flycheck-inline
-							  go-mode gptel latex-preview-pane
-							  ligature lsp-ui magit marginalia
-							  moe-theme nano-theme neotree org-bullets
-							  org-fragtog org-latex-impatient
-							  pdf-tools projectile quelpa rust-mode
-							  scroll-restore sideline-flycheck
-							  sideline-lsp try vertico which-key
-							  writeroom-mode yasnippet-snippets
-							  zig-mode))
+ '(package-selected-packages nil)
  '(package-vc-selected-packages
    '((ultra-scroll :url "https://github.com/jdtsmith/ultra-scroll")))
  '(size-indication-mode t)
