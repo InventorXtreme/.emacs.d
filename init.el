@@ -568,7 +568,18 @@
  '(display-time-mode nil)
  '(global-display-line-numbers-mode t)
  '(menu-bar-mode nil)
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(all-the-icons-completion all-the-icons-dired bash-completion company
+							  cyberpunk-theme dashboard doom-modeline
+							  evil-org exec-path-from-shell go-mode
+							  gptel latex-preview-pane ligature lsp-ui
+							  magit marginalia neotree org-bullets
+							  org-fragtog org-latex-impatient
+							  pdf-tools projectile rust-mode
+							  scroll-restore sideline-flycheck
+							  sideline-lsp try vertico
+							  visual-fill-column yasnippet-snippets
+							  zig-mode))
  '(package-vc-selected-packages
    '((ultra-scroll :url "https://github.com/jdtsmith/ultra-scroll")))
  '(size-indication-mode t)
